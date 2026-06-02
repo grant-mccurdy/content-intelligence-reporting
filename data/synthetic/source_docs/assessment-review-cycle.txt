@@ -1,0 +1,18 @@
+Title: Assessment Review Cycle Planning Notes
+Source Type: synthetic transcript
+License: synthetic public-safe demo
+
+The assessment team wants a repeatable review cycle that turns unstructured
+meeting notes into action items. Teachers describe item-level patterns, common
+misconceptions, and places where students need a short remediation sequence.
+
+The current pain point is that useful observations are scattered across meeting
+notes, spreadsheet comments, and informal follow-up messages. A content
+intelligence workflow should collect those notes, normalize the language, segment
+the material by source, and preserve citations back to the original source.
+
+The first report should answer three questions: which concepts need reteaching,
+which items need revision, and which follow-up artifacts should be created for
+students. The report should avoid overclaiming. It should quote or cite the
+source notes that support each recommendation.
+

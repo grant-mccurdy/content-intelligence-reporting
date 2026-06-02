@@ -1,0 +1,18 @@
+Title: Feedback Workflow Retrospective
+Source Type: synthetic transcript
+License: synthetic public-safe demo
+
+The pilot feedback workflow produced draft comments faster than the manual
+process, but teachers still needed a review checkpoint. The strongest results
+came when the rubric was explicit and the workflow returned structured evidence
+before generating student-facing language.
+
+The team noticed that generic AI feedback was not useful by itself. Better
+results came from source-grounded summaries: the system identified the claim,
+the evidence in the response, the misconception, and the recommended next step.
+Teachers then edited the language before release.
+
+The next version should separate private grading notes from student-facing
+feedback. It should also log which rubric criterion supported each generated
+comment so a reviewer can audit the result.
+

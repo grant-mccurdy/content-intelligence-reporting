@@ -1,0 +1,17 @@
+Title: Curriculum Search Notes
+Source Type: synthetic planning memo
+License: synthetic public-safe demo
+
+A curriculum lead wants to search across lesson notes, assessment reflections,
+and sample remediation plans. The search experience should prioritize concepts,
+skills, and instructional decisions rather than exact file names.
+
+The corpus should support questions like: where did the team discuss
+misconceptions about exponential models, which lessons produced remediation
+artifacts, and which assessments led to item revisions. The system should return
+short passages with source labels so the reader can inspect the evidence.
+
+For a public demo, all documents must be synthetic or public-license examples.
+The demo should not include student names, grades, private school documents,
+internal course links, or raw transcripts from private meetings or classes.
+

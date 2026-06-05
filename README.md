@@ -14,6 +14,7 @@ This repository is intended to demonstrate the public-safe version of a private 
 - Unstructured text processing
 - Transcript or corpus construction
 - Media-to-transcript ingestion
+- LLM-assisted transcript enrichment
 - OCR cleanup and document-to-corpus ingestion
 - Content extraction
 - Source-grounded analysis
@@ -61,9 +62,11 @@ This repository is designed to be reviewed quickly before running anything.
    AI-readable method contract.
 2. Read `docs/workflow-diagram.md` to understand how raw instructional artifacts
    become reusable information objects.
-3. Run `make portfolio-demo` to rebuild the demo artifacts and validate the
+3. Read `docs/transcript-enrichment-workflow.md` to see the public-safe version
+   of the raw-transcript-to-clean-transcript enrichment pass.
+4. Run `make portfolio-demo` to rebuild the demo artifacts and validate the
    generated objects.
-4. Inspect `sample_outputs/report-brief.json` and
+5. Inspect `sample_outputs/report-brief.json` and
    `sample_outputs/information-object-map.json` to see the structured reporting
    output and object inventory.
 
@@ -74,8 +77,10 @@ This repository is designed to be reviewed quickly before running anything.
 - `docs/using-information-objects.md`: how algorithms, reports, and agents use the objects.
 - `docs/completion-rubric.md`: the portfolio-ready completion criteria.
 - `docs/workflow-diagram.md`: the artifact-to-analysis workflow diagram.
+- `docs/transcript-enrichment-workflow.md`: the simulated OpenAI-style transcript cleanup workflow.
 - `sample_outputs/information-object-map.json`: object counts across all demos.
 - `sample_outputs/report-brief.json`: structured report output with cited evidence.
+- `sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md`: transcript enrichment summary.
 - `demos/cloud_video_transcription/`: staged media-to-corpus simulation.
 - `demos/ocr_document_cleanup/`: OCR cleanup-to-corpus simulation.
 
@@ -92,7 +97,7 @@ cloud video inventory
 -> temporary private download
 -> audio chunking
 -> transcription
--> transcript cleanup
+-> transcript cleanup / enrichment
 -> manifest and corpus-ready artifacts
 ```
 
@@ -101,6 +106,12 @@ Run the synthetic demo:
 ```bash
 python3 demos/cloud_video_transcription/run_demo.py
 ```
+
+The demo also writes public-safe enrichment artifacts that simulate an
+OpenAI-style cleanup pass without making a network request:
+
+- `sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md`
+- `sample_outputs/cloud_video_transcription/enrichment_packets/*.json`
 
 ### OCR Notes-to-Corpus Cleanup
 
@@ -147,6 +158,7 @@ content-intelligence-reporting/
 │   ├── workflow-diagram.md
 │   ├── completion-rubric.md
 │   ├── cloud-video-transcription-workflow.md
+│   ├── transcript-enrichment-workflow.md
 │   ├── cleanup-policy.md
 │   ├── using-information-objects.md
 │   ├── source-grounding.md
@@ -206,5 +218,5 @@ artifacts into reusable information objects, not the private course context.
 
 Portfolio-ready public scaffold implemented with synthetic input data, manifest
 creation, corpus segmentation, staged media and OCR demos, transparent keyword
-retrieval, source-grounded reporting, an AI-readable method pack, and validation
-for generated information objects.
+retrieval, simulated transcript enrichment, source-grounded reporting, an
+AI-readable method pack, and validation for generated information objects.

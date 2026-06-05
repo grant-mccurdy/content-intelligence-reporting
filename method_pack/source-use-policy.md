@@ -6,6 +6,7 @@ Allowed inputs:
 
 - `SourceManifestRecord`
 - `NormalizedArtifact`
+- `TranscriptEnrichmentPacket`
 - `CorpusSegment`
 - `EvidenceCitation`
 - `ReportBrief`

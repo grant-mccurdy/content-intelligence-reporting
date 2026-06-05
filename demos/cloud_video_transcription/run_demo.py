@@ -25,6 +25,28 @@ DEFAULT_RAW_TRANSCRIPT = DEMO_ROOT / "sample_transcript_raw.txt"
 DEFAULT_OUT = REPO_ROOT / "sample_outputs" / "cloud_video_transcription"
 MEDIA_EXTENSIONS = {".mp4", ".mov", ".m4v", ".webm", ".mkv", ".avi", ".mp3", ".wav", ".m4a"}
 CHUNK_TARGET_BYTES = 125_000_000
+TRANSCRIPT_ENRICHMENT_SYSTEM_PROMPT = (
+    "Clean a machine transcript for downstream analysis. Correct obvious "
+    "recognition errors, preserve the speaker's meaning and sequence, keep "
+    "uncertainty markers such as [unclear], and return only cleaned transcript "
+    "text plus structured correction notes."
+)
+SYNTHETIC_DOMAIN_CONTEXT = {
+    "course_context": "Public synthetic applied learning seminar.",
+    "likely_terms": [
+        "manifest",
+        "retrieval",
+        "corpus segment",
+        "source-grounded report",
+        "citation",
+    ],
+    "privacy_boundary": [
+        "no private names",
+        "no real course identifiers",
+        "no raw private transcripts",
+        "no credentials",
+    ],
+}
 
 
 def load_json(path: Path, default: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -120,10 +142,12 @@ def prepare_record(entry: dict[str, Any], out_dir: Path) -> dict[str, Any]:
         "audio_chunk_artifact": str(Path("audio_chunks") / stem),
         "transcription_status": "not_started",
         "cleanup_status": "not_started",
+        "enrichment_status": "not_started",
         "corpus_status": "not_started",
         "raw_media_artifact": str(Path("working_media_stubs") / f"{stem}.placeholder.txt"),
         "raw_transcript_artifact": str(Path("transcripts_raw") / f"{stem}.raw.txt"),
         "clean_transcript_artifact": str(Path("transcripts_clean") / f"{stem}.txt"),
+        "enrichment_artifact": str(Path("enrichment_packets") / f"{stem}.json"),
         "corpus_artifact": str(Path("corpus_segments") / f"{stem}.json"),
     }
 
@@ -134,6 +158,7 @@ def merge_record_defaults(record: dict[str, Any], entry: dict[str, Any], out_dir
         "raw_media_artifact",
         "raw_transcript_artifact",
         "clean_transcript_artifact",
+        "enrichment_artifact",
         "audio_chunk_artifact",
         "corpus_artifact",
     }
@@ -218,16 +243,68 @@ def action_transcribe(args: argparse.Namespace) -> int:
     return 0
 
 
-def clean_transcript(raw_text: str) -> str:
+def clean_transcript(raw_text: str) -> tuple[str, list[dict[str, str]]]:
     replacements = {
         "manafest": "manifest",
         "retrival": "retrieval",
     }
     cleaned = raw_text
+    corrections = []
     for old, new in replacements.items():
-        cleaned = re.sub(old, new, cleaned, flags=re.IGNORECASE)
+        matches = re.findall(old, cleaned, flags=re.IGNORECASE)
+        if matches:
+            corrections.append(
+                {
+                    "from": old,
+                    "to": new,
+                    "reason": "obvious synthetic transcription error",
+                    "count": str(len(matches)),
+                }
+            )
+            cleaned = re.sub(old, new, cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\n{3,}", "\n\n", cleaned.strip())
-    return cleaned + "\n"
+    return cleaned + "\n", corrections
+
+
+def build_enrichment_packet(record: dict[str, Any], raw_text: str, cleaned: str, corrections: list[dict[str, str]]) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "object_type": "TranscriptEnrichmentPacket",
+        "source_name": record["source_name"],
+        "source_path": record["source_path"],
+        "stage": "simulated_llm_transcript_cleanup",
+        "api_pattern": "OpenAI Responses-style cleanup request, simulated offline",
+        "system_prompt": TRANSCRIPT_ENRICHMENT_SYSTEM_PROMPT,
+        "domain_context": SYNTHETIC_DOMAIN_CONTEXT,
+        "input_contract": {
+            "raw_transcript_artifact": record["raw_transcript_artifact"],
+            "max_chars_per_request": 6500,
+            "preserve_chunk_markers": True,
+        },
+        "output_contract": {
+            "clean_transcript_artifact": record["clean_transcript_artifact"],
+            "correction_notes": "recorded separately from cleaned transcript text",
+            "allowed_changes": [
+                "correct clear recognition errors",
+                "normalize obvious terminology",
+                "preserve sequence and uncertainty markers",
+            ],
+            "disallowed_changes": [
+                "invent missing content",
+                "add private context",
+                "remove uncertainty markers",
+                "publish raw private transcript text",
+            ],
+        },
+        "corrections": corrections,
+        "raw_excerpt": raw_text[:900].strip(),
+        "clean_excerpt": cleaned[:900].strip(),
+        "public_safety": {
+            "uses_synthetic_transcript": True,
+            "contains_real_api_response": False,
+            "requires_credentials": False,
+        },
+    }
 
 
 def action_clean(args: argparse.Namespace) -> int:
@@ -237,25 +314,72 @@ def action_clean(args: argparse.Namespace) -> int:
         raw_path = args.out / record["raw_transcript_artifact"]
         clean_path = args.out / record["clean_transcript_artifact"]
         if clean_path.exists() and not args.force_clean:
+            raw_text = raw_path.read_text(encoding="utf-8")
+            cleaned = clean_path.read_text(encoding="utf-8")
+            _expected_cleaned, corrections = clean_transcript(raw_text)
+            enrichment_path = args.out / record["enrichment_artifact"]
+            enrichment_existed = enrichment_path.exists()
+            if not enrichment_existed:
+                write_json(enrichment_path, build_enrichment_packet(record, raw_text, cleaned, corrections))
+            record["enrichment_status"] = "skipped_existing" if enrichment_existed else "simulated"
             record["cleanup_status"] = "skipped_existing"
-            excerpts.append(clean_path.read_text(encoding="utf-8"))
+            excerpts.append(cleaned)
             continue
         raw_text = raw_path.read_text(encoding="utf-8")
-        cleaned = clean_transcript(raw_text)
+        cleaned, corrections = clean_transcript(raw_text)
         clean_path.parent.mkdir(parents=True, exist_ok=True)
         clean_path.write_text(cleaned, encoding="utf-8")
-        record["cleanup_status"] = "simulated"
+        enrichment_path = args.out / record["enrichment_artifact"]
+        write_json(enrichment_path, build_enrichment_packet(record, raw_text, cleaned, corrections))
+        record["cleanup_status"] = "simulated_llm_enrichment"
+        record["enrichment_status"] = "simulated"
         excerpts.append(cleaned)
     excerpt = excerpts[0] if excerpts else ""
     (args.out / "clean_transcript_excerpt.md").write_text(
         "# Clean Transcript Excerpt\n\n" + excerpt,
         encoding="utf-8",
     )
+    write_enrichment_brief(args.out, manifest)
     listing = load_json(args.input)
     update_manifest_summary(manifest, listing, excerpt)
     write_json(manifest_path(args.out), manifest)
     print(f"wrote {args.out / 'clean_transcript_excerpt.md'}")
     return 0
+
+
+def write_enrichment_brief(out_dir: Path, manifest: dict[str, Any]) -> None:
+    packets = []
+    for record in manifest.get("files", []):
+        artifact = record.get("enrichment_artifact")
+        if not artifact:
+            continue
+        path = out_dir / artifact
+        if path.exists():
+            packets.append(load_json(path))
+    correction_lines = []
+    for packet in packets:
+        for correction in packet.get("corrections", []):
+            correction_lines.append(
+                f"- `{correction['from']}` -> `{correction['to']}` "
+                f"({correction['reason']}, count {correction['count']})"
+            )
+    if not correction_lines:
+        correction_lines.append("- No corrections were needed in the synthetic sample.")
+    brief = (
+        "# Transcript Enrichment Brief\n\n"
+        "This public-safe artifact simulates the OpenAI cleanup pass used after "
+        "raw machine transcription. It records the prompt contract, domain "
+        "context, allowed edits, disallowed edits, and correction notes without "
+        "calling an external API or exposing private transcripts.\n\n"
+        "## Simulated Correction Notes\n\n"
+        + "\n".join(correction_lines)
+        + "\n\n## Public Boundary\n\n"
+        "- Synthetic transcript text only\n"
+        "- No credentials or network calls\n"
+        "- No private course identifiers or private source paths\n"
+        "- Raw transcript excerpts are short public-safe samples\n"
+    )
+    (out_dir / "transcript_enrichment_brief.md").write_text(brief, encoding="utf-8")
 
 
 def segment_text(text: str, max_chars: int) -> list[str]:
@@ -311,9 +435,11 @@ def write_summary(out_dir: Path, manifest: dict[str, Any]) -> None:
         f"- Synthetic media files selected: {manifest.get('media_file_count', 0)}\n"
         f"- Simulated total media size: {int(manifest.get('total_media_size_bytes') or 0):,} bytes\n"
         "- Stages shown: inventory, media selection, private download, audio chunking, "
-        "transcription, cleanup, manifesting, corpus preparation\n"
+        "transcription, simulated LLM transcript enrichment, manifesting, corpus preparation\n"
         "- Reuse pattern: staged CLI, idempotent skips, manifest status fields, "
         "source-preserving corpus records\n"
+        "- Enrichment pattern: raw machine transcript, domain context packet, guarded "
+        "cleanup prompt, correction notes, reviewed clean transcript\n"
         "- Public safety: no credentials, real media, real transcripts, or private paths\n"
     )
     (out_dir / "workflow_summary.md").write_text(summary, encoding="utf-8")

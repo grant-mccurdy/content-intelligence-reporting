@@ -28,6 +28,13 @@ typical context package would include:
 The agent can then produce a draft answer, report, or next-step recommendation
 while retaining auditable links back to source segments.
 
+## Transcript Enrichment
+
+A transcript enrichment step consumes raw transcript excerpts, domain context,
+and conservative cleanup rules. It emits `TranscriptEnrichmentPacket` objects
+that preserve the prompt contract, allowed edits, correction notes, and
+public-safety boundary before cleaned transcript text becomes corpus material.
+
 ## Algorithmic Analysis
 
 The same objects can support non-agentic analysis:

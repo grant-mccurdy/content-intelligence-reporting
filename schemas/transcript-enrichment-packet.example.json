@@ -1,0 +1,46 @@
+{
+  "object_type": "TranscriptEnrichmentPacket",
+  "schema_version": 1,
+  "source_name": "seminar_01_intro.mp4",
+  "source_path": "/synthetic/seminars/seminar_01_intro.mp4",
+  "stage": "simulated_llm_transcript_cleanup",
+  "api_pattern": "OpenAI Responses-style cleanup request, simulated offline",
+  "system_prompt": "Clean a machine transcript for downstream analysis. Correct obvious recognition errors and preserve uncertainty markers.",
+  "domain_context": {
+    "course_context": "Public synthetic applied learning seminar.",
+    "likely_terms": [
+      "manifest",
+      "retrieval",
+      "corpus segment"
+    ],
+    "privacy_boundary": [
+      "no private names",
+      "no real course identifiers",
+      "no credentials"
+    ]
+  },
+  "input_contract": {
+    "raw_transcript_artifact": "transcripts_raw/seminar_01_intro.raw.txt",
+    "max_chars_per_request": 6500,
+    "preserve_chunk_markers": true
+  },
+  "output_contract": {
+    "clean_transcript_artifact": "transcripts_clean/seminar_01_intro.txt",
+    "correction_notes": "recorded separately from cleaned transcript text"
+  },
+  "corrections": [
+    {
+      "from": "retrival",
+      "to": "retrieval",
+      "reason": "obvious synthetic transcription error",
+      "count": "2"
+    }
+  ],
+  "raw_excerpt": "Raw synthetic transcript excerpt.",
+  "clean_excerpt": "Clean synthetic transcript excerpt.",
+  "public_safety": {
+    "uses_synthetic_transcript": true,
+    "contains_real_api_response": false,
+    "requires_credentials": false
+  }
+}

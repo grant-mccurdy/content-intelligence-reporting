@@ -22,6 +22,7 @@ transcripts, or institution-specific context.
 | Evidence-grounded report object | Complete | `scripts/generate_report.py` and `sample_outputs/report-brief.json`. |
 | AI-readable method pack | Complete | `method_pack/` and `sample_outputs/analysis-method-pack.json`. |
 | Media ingestion workflow | Complete | `docs/cloud-video-transcription-workflow.md` and `demos/cloud_video_transcription/`. |
+| Transcript enrichment workflow | Complete | `docs/transcript-enrichment-workflow.md` and `sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md`. |
 | OCR cleanup workflow | Complete | `demos/ocr_document_cleanup/`. |
 | Generated object validation | Complete | `scripts/validate_information_objects.py`. |
 | Reviewer path | Complete | README reviewer path and `docs/workflow-diagram.md`. |

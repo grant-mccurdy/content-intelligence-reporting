@@ -11,6 +11,18 @@ from typing import Any
 REQUIRED_FIELDS = {
     "SourceManifestRecord": {"source_id", "title", "source_type", "status"},
     "NormalizedArtifact": {"artifact_id", "source_id", "transform", "status"},
+    "TranscriptEnrichmentPacket": {
+        "object_type",
+        "schema_version",
+        "source_name",
+        "stage",
+        "system_prompt",
+        "domain_context",
+        "input_contract",
+        "output_contract",
+        "corrections",
+        "public_safety",
+    },
     "CorpusSegment": {"segment_id", "source_id", "title", "source_type", "text", "citation"},
     "EvidenceCitation": {"question", "rank", "segment_id", "source_id", "citation", "score", "excerpt"},
     "ReportBrief": {"object_type", "schema_version", "title", "questions", "evidence_citations"},
@@ -101,6 +113,20 @@ def validate_corpus(path: Path, errors: list[str]) -> int:
     return len(segments)
 
 
+def validate_enrichment_packets(path: Path, errors: list[str]) -> int:
+    if not path.exists():
+        errors.append(f"{path}: missing enrichment packet directory")
+        return 0
+    count = 0
+    for packet_path in sorted(path.glob("*.json")):
+        packet = load_json(packet_path)
+        require_fields(str(packet_path), packet, REQUIRED_FIELDS["TranscriptEnrichmentPacket"], errors)
+        count += 1
+    if count == 0:
+        errors.append(f"{path}: no enrichment packets found")
+    return count
+
+
 def validate_report_brief(path: Path, errors: list[str]) -> int:
     brief = load_json(path)
     require_fields(str(path), brief, REQUIRED_FIELDS["ReportBrief"], errors)
@@ -161,6 +187,7 @@ def validate(root: Path) -> tuple[int, list[str]]:
     ]:
         checked += validate_corpus(path, errors)
     checked += validate_report_brief(root / "sample_outputs" / "report-brief.json", errors)
+    checked += validate_enrichment_packets(root / "sample_outputs" / "cloud_video_transcription" / "enrichment_packets", errors)
     checked += validate_object_map(root / "sample_outputs" / "information-object-map.json", errors)
     checked += validate_method_pack(root / "method_pack" / "analysis-method-pack.json", errors)
     checked += validate_method_pack(root / "sample_outputs" / "analysis-method-pack.json", errors)

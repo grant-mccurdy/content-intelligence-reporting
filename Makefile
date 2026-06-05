@@ -1,7 +1,9 @@
-.PHONY: demo manifest corpus report search media-demo ocr-demo object-map method-pack validate portfolio-demo clean
+.PHONY: all demo manifest corpus report search media-demo ocr-demo object-map method-pack validate portfolio-demo clean
 
 PYTHON ?= python3
 QUERY ?= source grounded report citations
+
+all: portfolio-demo
 
 demo: manifest corpus report
 

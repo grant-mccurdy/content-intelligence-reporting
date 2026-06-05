@@ -28,6 +28,10 @@ def count_corpus_segments(path: Path) -> int:
     return int(corpus.get("segment_count") or len(corpus.get("segments", [])))
 
 
+def count_enrichment_packets(path: Path) -> int:
+    return len(list(path.glob("*.json"))) if path.exists() else 0
+
+
 def build_map(root: Path) -> dict[str, Any]:
     report_brief = load_json(root / "sample_outputs" / "report-brief.json", {})
     evidence = report_brief.get("evidence_citations", [])
@@ -44,6 +48,7 @@ def build_map(root: Path) -> dict[str, Any]:
             "pipeline": "cloud_video_transcription",
             "source_manifest_records": count_manifest_sources(root / "sample_outputs" / "cloud_video_transcription" / "manifest.json"),
             "normalized_artifacts": count_manifest_sources(root / "sample_outputs" / "cloud_video_transcription" / "manifest.json"),
+            "transcript_enrichment_packets": count_enrichment_packets(root / "sample_outputs" / "cloud_video_transcription" / "enrichment_packets"),
             "corpus_segments": count_corpus_segments(root / "sample_outputs" / "cloud_video_transcription" / "corpus.json"),
             "evidence_citations": 0,
             "report_briefs": 0,
@@ -64,6 +69,7 @@ def build_map(root: Path) -> dict[str, Any]:
         "object_families": [
             "SourceManifestRecord",
             "NormalizedArtifact",
+            "TranscriptEnrichmentPacket",
             "CorpusSegment",
             "EvidenceCitation",
             "ReportBrief",

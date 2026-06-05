@@ -39,6 +39,7 @@ def build_pack(root: Path) -> dict[str, Any]:
             "sample_outputs/information-object-map.json",
             "sample_outputs/report-brief.json",
             "sample_outputs/cloud_video_transcription/corpus.json",
+            "sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md",
             "sample_outputs/ocr_document_cleanup/corpus.json",
         ],
     )

@@ -10,10 +10,12 @@ objects, then use those objects to support search, citation, and reporting.
 flowchart LR
     A[Instructional artifacts] --> B[Source manifest records]
     B --> C[Normalized artifacts]
-    C --> D[Corpus segments]
+    C --> H[Transcript enrichment]
+    H --> D[Corpus segments]
     D --> E[Evidence citations]
     E --> F[Report brief]
-    D --> G[Analysis method pack]
+    H --> G[Analysis method pack]
+    D --> G
     E --> G
     F --> G
 ```
@@ -24,6 +26,7 @@ flowchart LR
 | --- | --- | --- |
 | Source inventory | `SourceManifestRecord` | Records source identity, type, license, checksum, and processing status. |
 | Cleanup | `NormalizedArtifact` | Stores cleaned, public-safe text with stable source metadata. |
+| Enrichment | `TranscriptEnrichmentPacket` | Captures domain context, guarded cleanup rules, correction notes, and before/after transcript excerpts. |
 | Retrieval | `CorpusSegment` | Breaks cleaned artifacts into searchable, citation-preserving units. |
 | Grounding | `EvidenceCitation` | Links report claims back to source segments. |
 | Reporting | `ReportBrief` | Captures the structured analytical answer, evidence, and limitations. |

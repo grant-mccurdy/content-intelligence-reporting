@@ -23,7 +23,7 @@ cloud video inventory
 -> download only when regeneration is needed
 -> split audio into bounded chunks
 -> transcribe each chunk
--> clean transcript with domain context
+-> enrich transcript with domain context
 -> record source manifest and processing status
 -> build searchable corpus segments
 -> cite transcript-derived evidence in reports
@@ -41,8 +41,9 @@ cloud video inventory
    are predictable and retryable.
 5. Generate raw transcripts per chunk, then combine them into one raw transcript
    per video.
-6. Run a cleanup pass that corrects obvious recognition errors while preserving
-   uncertainty markers.
+6. Run a cleanup/enrichment pass that sends bounded transcript chunks, domain
+   context, and conservative editing rules through an OpenAI-style response
+   workflow. The public demo simulates this step offline.
 7. Segment cleaned transcripts into corpus records with stable source IDs.
 8. Keep raw videos, audio chunks, and full transcripts private. Publish only
    synthetic examples, aggregate summaries, workflow diagrams, and reviewed
@@ -68,11 +69,16 @@ The demo writes:
 
 - `sample_outputs/cloud_video_transcription/manifest.json`
 - `sample_outputs/cloud_video_transcription/clean_transcript_excerpt.md`
+- `sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md`
+- `sample_outputs/cloud_video_transcription/enrichment_packets/*.json`
 - `sample_outputs/cloud_video_transcription/workflow_summary.md`
 - `sample_outputs/cloud_video_transcription/corpus.json`
 
 It requires only the Python standard library. No network access, credentials,
 media files, or transcription API calls are used.
+
+See `docs/transcript-enrichment-workflow.md` for the public-safe version of the
+raw-transcript-to-clean-transcript OpenAI cleanup pattern.
 
 The demo intentionally exposes stage-level commands (`list`, `download`,
 `transcribe`, `clean`, `prepare-corpus`, and `run`) to show how a larger private

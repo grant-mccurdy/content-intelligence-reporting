@@ -8,6 +8,7 @@ so they can feed search, reporting, algorithmic analysis, or agent context.
 instructional artifacts
 -> SourceManifestRecord
 -> NormalizedArtifact
+-> TranscriptEnrichmentPacket
 -> CorpusSegment
 -> EvidenceCitation
 -> ReportBrief
@@ -25,6 +26,12 @@ license or public-safety status, checksum when available, and processing status.
 Represents a cleaned text artifact derived from an original source. Examples
 include cleaned transcript excerpts, OCR-cleaned notes, or normalized synthetic
 source documents.
+
+### TranscriptEnrichmentPacket
+
+Captures the guarded transcript cleanup step between raw machine transcription
+and corpus construction. It records the prompt contract, domain context, allowed
+edits, disallowed edits, correction notes, and public-safety metadata.
 
 ### CorpusSegment
 

@@ -1,4 +1,4 @@
-.PHONY: demo manifest corpus report search media-demo ocr-demo object-map validate portfolio-demo clean
+.PHONY: demo manifest corpus report search media-demo ocr-demo object-map method-pack validate portfolio-demo clean
 
 PYTHON ?= python3
 QUERY ?= source grounded report citations
@@ -26,10 +26,13 @@ ocr-demo:
 object-map: report media-demo ocr-demo
 	$(PYTHON) scripts/build_information_object_map.py
 
+method-pack: object-map
+	$(PYTHON) scripts/build_analysis_method_pack.py
+
 validate:
 	$(PYTHON) scripts/validate_information_objects.py
 
-portfolio-demo: demo media-demo ocr-demo object-map validate
+portfolio-demo: demo media-demo ocr-demo object-map method-pack validate
 
 clean:
-	rm -rf data/processed sample_outputs/demo-report.md sample_outputs/report-brief.json sample_outputs/information-object-map.json sample_outputs/cloud_video_transcription sample_outputs/ocr_document_cleanup
+	rm -rf data/processed sample_outputs/demo-report.md sample_outputs/report-brief.json sample_outputs/information-object-map.json sample_outputs/analysis-method-pack.json sample_outputs/cloud_video_transcription sample_outputs/ocr_document_cleanup

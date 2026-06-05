@@ -15,6 +15,19 @@ REQUIRED_FIELDS = {
     "EvidenceCitation": {"question", "rank", "segment_id", "source_id", "citation", "score", "excerpt"},
     "ReportBrief": {"object_type", "schema_version", "title", "questions", "evidence_citations"},
     "InformationObjectMap": {"object_type", "schema_version", "object_families", "pipelines"},
+    "AnalysisMethodPack": {
+        "object_type",
+        "schema_version",
+        "method_pack_version",
+        "purpose",
+        "object_families",
+        "input_contracts",
+        "output_contracts",
+        "source_use_rules",
+        "reporting_rules",
+        "privacy_rules",
+        "references",
+    },
 }
 
 
@@ -120,6 +133,17 @@ def validate_object_map(path: Path, errors: list[str]) -> int:
     return len(pipelines)
 
 
+def validate_method_pack(path: Path, errors: list[str]) -> int:
+    pack = load_json(path)
+    require_fields(str(path), pack, REQUIRED_FIELDS["AnalysisMethodPack"], errors)
+    for field in ["object_families", "input_contracts", "output_contracts", "source_use_rules", "reporting_rules", "privacy_rules"]:
+        if not isinstance(pack.get(field), list) or not pack.get(field):
+            errors.append(f"{path}: {field} must be a non-empty list")
+    if not isinstance(pack.get("references"), dict) or not pack.get("references"):
+        errors.append(f"{path}: references must be a non-empty object")
+    return 1
+
+
 def validate(root: Path) -> tuple[int, list[str]]:
     errors: list[str] = []
     checked = 0
@@ -138,6 +162,8 @@ def validate(root: Path) -> tuple[int, list[str]]:
         checked += validate_corpus(path, errors)
     checked += validate_report_brief(root / "sample_outputs" / "report-brief.json", errors)
     checked += validate_object_map(root / "sample_outputs" / "information-object-map.json", errors)
+    checked += validate_method_pack(root / "method_pack" / "analysis-method-pack.json", errors)
+    checked += validate_method_pack(root / "sample_outputs" / "analysis-method-pack.json", errors)
     return checked, errors
 
 

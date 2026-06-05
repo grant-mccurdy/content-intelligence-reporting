@@ -4,6 +4,9 @@ Generalized content intelligence pipeline for turning unstructured instructional
 artifacts into analysis-ready information objects, searchable corpora, and
 source-grounded analytical reports.
 
+Primary artifact: an AI-readable analysis method pack for turning instructional
+information objects into source-grounded reports.
+
 This repository is intended to demonstrate the public-safe version of a private workflow originally developed around transcript/corpus construction and analytical reporting. The public version must use sanitized, synthetic, or public-license source material.
 
 ## What This Project Demonstrates
@@ -35,8 +38,22 @@ instructional artifacts
 See `docs/information-object-model.md` for the object model and `schemas/` for
 public-safe JSON examples.
 
+## Primary Artifact
+
+The canonical artifact is `sample_outputs/analysis-method-pack.json`: an
+AI-readable method pack that tells an agent or algorithm how to consume the
+information objects, cite evidence, preserve uncertainty, and avoid private
+source leakage.
+
+The source method pack lives in `method_pack/` with human-readable companions:
+
+- `method_pack/reporting-rules.md`
+- `method_pack/source-use-policy.md`
+- `method_pack/example-context.md`
+
 ## What To Inspect First
 
+- `sample_outputs/analysis-method-pack.json`: AI-readable reporting method contract.
 - `docs/information-object-model.md`: the reusable object model.
 - `docs/using-information-objects.md`: how algorithms, reports, and agents use the objects.
 - `sample_outputs/information-object-map.json`: object counts across all demos.
@@ -99,7 +116,8 @@ content-intelligence-reporting/
 │   ├── build_corpus.py
 │   ├── search_corpus.py
 │   ├── generate_report.py
-│   └── build_information_object_map.py
+│   ├── build_information_object_map.py
+│   └── build_analysis_method_pack.py
 ├── demos/
 │   ├── cloud_video_transcription/
 │   └── ocr_document_cleanup/
@@ -114,6 +132,7 @@ content-intelligence-reporting/
 │   ├── source-grounding.md
 │   └── privacy-and-copyright.md
 ├── schemas/
+├── method_pack/
 ├── screenshots/
 └── README.md
 ```
@@ -126,6 +145,7 @@ The current scaffold is offline and standard-library only.
 make demo
 make search QUERY="feedback rubric evidence"
 make validate
+make portfolio-demo
 ```
 
 If `make` is unavailable, run the same steps directly:
@@ -135,6 +155,7 @@ python3 scripts/build_manifest.py
 python3 scripts/build_corpus.py
 python3 scripts/generate_report.py
 python3 scripts/search_corpus.py "feedback rubric evidence"
+python3 scripts/build_analysis_method_pack.py
 python3 scripts/validate_information_objects.py
 ```
 
@@ -144,6 +165,7 @@ The demo builds:
 - `data/processed/corpus.json`
 - `sample_outputs/demo-report.md`
 - `sample_outputs/report-brief.json`
+- `sample_outputs/analysis-method-pack.json`
 
 Generated outputs are reproducible and intentionally ignored where appropriate.
 The committed sources use synthetic public-safe notes only.

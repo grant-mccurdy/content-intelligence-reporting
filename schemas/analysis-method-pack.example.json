@@ -1,0 +1,41 @@
+{
+  "object_type": "AnalysisMethodPack",
+  "schema_version": 1,
+  "method_pack_version": "0.1.0",
+  "purpose": "Guide analysis and reporting over instructional information objects.",
+  "object_families": [
+    "SourceManifestRecord",
+    "CorpusSegment",
+    "EvidenceCitation",
+    "ReportBrief"
+  ],
+  "input_contracts": [
+    {
+      "name": "analysis_corpus",
+      "accepts": [
+        "CorpusSegment"
+      ]
+    }
+  ],
+  "output_contracts": [
+    {
+      "name": "evidence_first_report",
+      "emits": [
+        "EvidenceCitation",
+        "ReportBrief"
+      ]
+    }
+  ],
+  "source_use_rules": [
+    "Use source-preserving objects, not raw private artifacts."
+  ],
+  "reporting_rules": [
+    "Cite every substantive claim."
+  ],
+  "privacy_rules": [
+    "Do not expose private identifiers or raw transcripts."
+  ],
+  "references": {
+    "object_model": "docs/information-object-model.md"
+  }
+}

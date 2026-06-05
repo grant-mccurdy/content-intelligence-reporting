@@ -1,0 +1,66 @@
+{
+  "api_pattern": "OpenAI Responses-style cleanup request, simulated offline",
+  "clean_excerpt": "[Chunk 001: chunk-001.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 002: chunk-002.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe",
+  "corrections": [
+    {
+      "count": "6",
+      "from": "manafest",
+      "reason": "obvious synthetic transcription error",
+      "to": "manifest"
+    },
+    {
+      "count": "6",
+      "from": "retrival",
+      "reason": "obvious synthetic transcription error",
+      "to": "retrieval"
+    }
+  ],
+  "domain_context": {
+    "course_context": "Public synthetic applied learning seminar.",
+    "likely_terms": [
+      "manifest",
+      "retrieval",
+      "corpus segment",
+      "source-grounded report",
+      "citation"
+    ],
+    "privacy_boundary": [
+      "no private names",
+      "no real course identifiers",
+      "no raw private transcripts",
+      "no credentials"
+    ]
+  },
+  "input_contract": {
+    "max_chars_per_request": 6500,
+    "preserve_chunk_markers": true,
+    "raw_transcript_artifact": "transcripts_raw/seminar_01_discussion.raw.txt"
+  },
+  "object_type": "TranscriptEnrichmentPacket",
+  "output_contract": {
+    "allowed_changes": [
+      "correct clear recognition errors",
+      "normalize obvious terminology",
+      "preserve sequence and uncertainty markers"
+    ],
+    "clean_transcript_artifact": "transcripts_clean/seminar_01_discussion.txt",
+    "correction_notes": "recorded separately from cleaned transcript text",
+    "disallowed_changes": [
+      "invent missing content",
+      "add private context",
+      "remove uncertainty markers",
+      "publish raw private transcript text"
+    ]
+  },
+  "public_safety": {
+    "contains_real_api_response": false,
+    "requires_credentials": false,
+    "uses_synthetic_transcript": true
+  },
+  "raw_excerpt": "[Chunk 001: chunk-001.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manafest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manafest and retrival.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrival or reporting workflow.\n\n[Chunk 002: chunk-002.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe f",
+  "schema_version": 1,
+  "source_name": "seminar_01_discussion.mp4",
+  "source_path": "/Demo Instructional Media/Seminar Recordings/Week 01/seminar_01_discussion.mp4",
+  "stage": "simulated_llm_transcript_cleanup",
+  "system_prompt": "Clean a machine transcript for downstream analysis. Correct obvious recognition errors, preserve the speaker's meaning and sequence, keep uncertainty markers such as [unclear], and return only cleaned transcript text plus structured correction notes."
+}

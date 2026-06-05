@@ -3,6 +3,7 @@
   "object_families": [
     "SourceManifestRecord",
     "NormalizedArtifact",
+    "TranscriptEnrichmentPacket",
     "CorpusSegment",
     "EvidenceCitation",
     "ReportBrief"
@@ -23,7 +24,8 @@
       "normalized_artifacts": 3,
       "pipeline": "cloud_video_transcription",
       "report_briefs": 0,
-      "source_manifest_records": 3
+      "source_manifest_records": 3,
+      "transcript_enrichment_packets": 3
     },
     {
       "corpus_segments": 3,

@@ -1,4 +1,10 @@
 {
+  "enrichment_rules": [
+    "Treat transcript enrichment as a conservative cleanup step, not a summarization step.",
+    "Use domain context to correct clear recognition errors, terminology, and punctuation.",
+    "Preserve source order, uncertainty markers, and speaker meaning.",
+    "Record material corrections separately from cleaned transcript text."
+  ],
   "generated_artifacts": [
     {
       "exists": true,
@@ -14,6 +20,11 @@
       "exists": true,
       "kind": "json",
       "path": "sample_outputs/cloud_video_transcription/corpus.json"
+    },
+    {
+      "exists": true,
+      "kind": "md",
+      "path": "sample_outputs/cloud_video_transcription/transcript_enrichment_brief.md"
     },
     {
       "exists": true,
@@ -58,6 +69,7 @@
   "object_families": [
     "SourceManifestRecord",
     "NormalizedArtifact",
+    "TranscriptEnrichmentPacket",
     "CorpusSegment",
     "EvidenceCitation",
     "ReportBrief"
@@ -83,6 +95,7 @@
     "cleanup_policy": "docs/cleanup-policy.md",
     "object_model": "docs/information-object-model.md",
     "source_grounding": "docs/source-grounding.md",
+    "transcript_enrichment": "docs/transcript-enrichment-workflow.md",
     "usage_notes": "docs/using-information-objects.md"
   },
   "reporting_rules": [

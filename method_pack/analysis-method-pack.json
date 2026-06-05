@@ -6,6 +6,7 @@
   "object_families": [
     "SourceManifestRecord",
     "NormalizedArtifact",
+    "TranscriptEnrichmentPacket",
     "CorpusSegment",
     "EvidenceCitation",
     "ReportBrief"
@@ -42,6 +43,12 @@
     "Distinguish direct evidence from inference.",
     "Do not make claims that cannot be traced to supplied source objects."
   ],
+  "enrichment_rules": [
+    "Treat transcript enrichment as a conservative cleanup step, not a summarization step.",
+    "Use domain context to correct clear recognition errors, terminology, and punctuation.",
+    "Preserve source order, uncertainty markers, and speaker meaning.",
+    "Record material corrections separately from cleaned transcript text."
+  ],
   "reporting_rules": [
     "Start from the user question or reporting objective.",
     "Retrieve relevant CorpusSegment objects.",
@@ -57,6 +64,7 @@
     "object_model": "docs/information-object-model.md",
     "source_grounding": "docs/source-grounding.md",
     "cleanup_policy": "docs/cleanup-policy.md",
+    "transcript_enrichment": "docs/transcript-enrichment-workflow.md",
     "usage_notes": "docs/using-information-objects.md"
   }
 }

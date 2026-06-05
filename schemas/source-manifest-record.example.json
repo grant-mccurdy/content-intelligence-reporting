@@ -1,0 +1,10 @@
+{
+  "object_type": "SourceManifestRecord",
+  "schema_version": 1,
+  "source_id": "synthetic-notes",
+  "title": "Synthetic Seminar Board Notes",
+  "source_type": "ocr_notes",
+  "license": "synthetic-demo",
+  "sha256": "example-checksum",
+  "status": "identified"
+}

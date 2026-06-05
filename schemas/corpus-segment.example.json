@@ -1,0 +1,10 @@
+{
+  "object_type": "CorpusSegment",
+  "schema_version": 1,
+  "segment_id": "synthetic-notes#p001",
+  "source_id": "synthetic-notes",
+  "title": "Synthetic Seminar Board Notes",
+  "source_type": "ocr_notes",
+  "text": "A short public-safe source-preserving segment.",
+  "citation": "Synthetic Seminar Board Notes, page 1"
+}

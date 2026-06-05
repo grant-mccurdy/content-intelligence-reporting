@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "segment_count": 11,
+  "segments": [
+    {
+      "citation": "seminar_01_discussion.mp4, segment 1",
+      "segment_id": "seminar_01_discussion#01",
+      "source_id": "seminar_01_discussion",
+      "source_type": "synthetic media transcript",
+      "text": "[Chunk 001: chunk-001.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.",
+      "title": "seminar 01 discussion.mp4"
+    },
+    {
+      "citation": "seminar_01_discussion.mp4, segment 2",
+      "segment_id": "seminar_01_discussion#02",
+      "source_id": "seminar_01_discussion",
+      "source_type": "synthetic media transcript",
+      "text": "Finally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 002: chunk-002.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.",
+      "title": "seminar 01 discussion.mp4"
+    },
+    {
+      "citation": "seminar_01_discussion.mp4, segment 3",
+      "segment_id": "seminar_01_discussion#03",
+      "source_id": "seminar_01_discussion",
+      "source_type": "synthetic media transcript",
+      "text": "Next, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 003: chunk-003.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.",
+      "title": "seminar 01 discussion.mp4"
+    },
+    {
+      "citation": "seminar_01_discussion.mp4, segment 4",
+      "segment_id": "seminar_01_discussion#04",
+      "source_id": "seminar_01_discussion",
+      "source_type": "synthetic media transcript",
+      "text": "The first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.",
+      "title": "seminar 01 discussion.mp4"
+    },
+    {
+      "citation": "seminar_01_intro.mp4, segment 1",
+      "segment_id": "seminar_01_intro#01",
+      "source_id": "seminar_01_intro",
+      "source_type": "synthetic media transcript",
+      "text": "[Chunk 001: chunk-001.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.",
+      "title": "seminar 01 intro.mp4"
+    },
+    {
+      "citation": "seminar_01_intro.mp4, segment 2",
+      "segment_id": "seminar_01_intro#02",
+      "source_id": "seminar_01_intro",
+      "source_type": "synthetic media transcript",
+      "text": "Finally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 002: chunk-002.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.",
+      "title": "seminar 01 intro.mp4"
+    },
+    {
+      "citation": "seminar_01_intro.mp4, segment 3",
+      "segment_id": "seminar_01_intro#03",
+      "source_id": "seminar_01_intro",
+      "source_type": "synthetic media transcript",
+      "text": "Next, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.",
+      "title": "seminar 01 intro.mp4"
+    },
+    {
+      "citation": "seminar_02_modeling.mov, segment 1",
+      "segment_id": "seminar_02_modeling#01",
+      "source_id": "seminar_02_modeling",
+      "source_type": "synthetic media transcript",
+      "text": "[Chunk 001: chunk-001.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.",
+      "title": "seminar 02 modeling.mov"
+    },
+    {
+      "citation": "seminar_02_modeling.mov, segment 2",
+      "segment_id": "seminar_02_modeling#02",
+      "source_id": "seminar_02_modeling",
+      "source_type": "synthetic media transcript",
+      "text": "Finally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 002: chunk-002.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.\n\nThe first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.",
+      "title": "seminar 02 modeling.mov"
+    },
+    {
+      "citation": "seminar_02_modeling.mov, segment 3",
+      "segment_id": "seminar_02_modeling#03",
+      "source_id": "seminar_02_modeling",
+      "source_type": "synthetic media transcript",
+      "text": "Next, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.\n\n[Chunk 003: chunk-003.mp3.txt]\nWelcome back to the applied learning seminar. Today we are connecting source\nmaterials to a concept index and a coverage report.",
+      "title": "seminar 02 modeling.mov"
+    },
+    {
+      "citation": "seminar_02_modeling.mov, segment 4",
+      "segment_id": "seminar_02_modeling#04",
+      "source_id": "seminar_02_modeling",
+      "source_type": "synthetic media transcript",
+      "text": "The first step is to build a manifest of the source files so every transformed\nartifact can be traced back to the original input. We should keep the video\nfiles private and only promote reviewed summaries or synthetic examples.\n\nNext, split the audio into predictable segments. If the transcription model is\nuncertain, keep the [unclear] marker instead of inventing a term. Then clean\nobvious spelling errors such as manifest and retrieval.\n\nFinally, the analyst reviews the cleaned transcript excerpt before it becomes\npart of a downstream retrieval or reporting workflow.",
+      "title": "seminar 02 modeling.mov"
+    }
+  ]
+}

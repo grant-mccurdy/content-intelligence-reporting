@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+
+REQUIRED_FIELDS = {
+    "SourceManifestRecord": {"source_id", "title", "source_type", "status"},
+    "NormalizedArtifact": {"artifact_id", "source_id", "transform", "status"},
+    "CorpusSegment": {"segment_id", "source_id", "title", "source_type", "text", "citation"},
+    "EvidenceCitation": {"question", "rank", "segment_id", "source_id", "citation", "score", "excerpt"},
+    "ReportBrief": {"object_type", "schema_version", "title", "questions", "evidence_citations"},
+    "InformationObjectMap": {"object_type", "schema_version", "object_families", "pipelines"},
+}
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def require_fields(label: str, obj: dict[str, Any], fields: set[str], errors: list[str]) -> None:
+    missing = sorted(field for field in fields if field not in obj)
+    if missing:
+        errors.append(f"{label}: missing {', '.join(missing)}")
+
+
+def validate_schema_examples(root: Path, errors: list[str]) -> int:
+    count = 0
+    for path in sorted((root / "schemas").glob("*.json")):
+        obj = load_json(path)
+        object_type = obj.get("object_type")
+        if not object_type:
+            errors.append(f"{path}: missing object_type")
+            continue
+        fields = REQUIRED_FIELDS.get(object_type)
+        if not fields:
+            errors.append(f"{path}: unknown object_type {object_type}")
+            continue
+        require_fields(str(path), obj, fields, errors)
+        count += 1
+    return count
+
+
+def validate_manifest(path: Path, errors: list[str]) -> int:
+    manifest = load_json(path)
+    records = manifest.get("sources", manifest.get("files", manifest.get("pages", [])))
+    if not isinstance(records, list):
+        errors.append(f"{path}: manifest records must be a list")
+        return 0
+    for idx, record in enumerate(records, start=1):
+        if not isinstance(record, dict):
+            errors.append(f"{path}: record {idx} is not an object")
+            continue
+        if "source_id" in record:
+            require_fields(f"{path}: source {idx}", record, REQUIRED_FIELDS["SourceManifestRecord"], errors)
+        elif "source_name" in record:
+            require_fields(
+                f"{path}: media source {idx}",
+                record,
+                {"source_name", "source_path", "download_status", "transcription_status", "cleanup_status", "corpus_status"},
+                errors,
+            )
+        elif "page" in record:
+            require_fields(f"{path}: page {idx}", record, {"page", "ocr_status", "cleanup_status"}, errors)
+        else:
+            errors.append(f"{path}: record {idx} has no recognized source identity")
+    return len(records)
+
+
+def validate_corpus(path: Path, errors: list[str]) -> int:
+    corpus = load_json(path)
+    segments = corpus.get("segments")
+    if not isinstance(segments, list):
+        errors.append(f"{path}: missing segments list")
+        return 0
+    for idx, segment in enumerate(segments, start=1):
+        if not isinstance(segment, dict):
+            errors.append(f"{path}: segment {idx} is not an object")
+            continue
+        require_fields(f"{path}: segment {idx}", segment, REQUIRED_FIELDS["CorpusSegment"], errors)
+    expected_count = corpus.get("segment_count")
+    if expected_count is not None and int(expected_count) != len(segments):
+        errors.append(f"{path}: segment_count {expected_count} does not match {len(segments)} segments")
+    return len(segments)
+
+
+def validate_report_brief(path: Path, errors: list[str]) -> int:
+    brief = load_json(path)
+    require_fields(str(path), brief, REQUIRED_FIELDS["ReportBrief"], errors)
+    evidence = brief.get("evidence_citations", [])
+    if not isinstance(evidence, list):
+        errors.append(f"{path}: evidence_citations must be a list")
+        return 0
+    for idx, citation in enumerate(evidence, start=1):
+        if not isinstance(citation, dict):
+            errors.append(f"{path}: evidence citation {idx} is not an object")
+            continue
+        require_fields(f"{path}: evidence citation {idx}", citation, REQUIRED_FIELDS["EvidenceCitation"], errors)
+    return len(evidence)
+
+
+def validate_object_map(path: Path, errors: list[str]) -> int:
+    object_map = load_json(path)
+    require_fields(str(path), object_map, REQUIRED_FIELDS["InformationObjectMap"], errors)
+    pipelines = object_map.get("pipelines", [])
+    if not isinstance(pipelines, list):
+        errors.append(f"{path}: pipelines must be a list")
+        return 0
+    for idx, pipeline in enumerate(pipelines, start=1):
+        require_fields(
+            f"{path}: pipeline {idx}",
+            pipeline,
+            {"pipeline", "source_manifest_records", "normalized_artifacts", "corpus_segments"},
+            errors,
+        )
+    return len(pipelines)
+
+
+def validate(root: Path) -> tuple[int, list[str]]:
+    errors: list[str] = []
+    checked = 0
+    checked += validate_schema_examples(root, errors)
+    for path in [
+        root / "data" / "processed" / "manifest.json",
+        root / "sample_outputs" / "cloud_video_transcription" / "manifest.json",
+        root / "sample_outputs" / "ocr_document_cleanup" / "manifest.json",
+    ]:
+        checked += validate_manifest(path, errors)
+    for path in [
+        root / "data" / "processed" / "corpus.json",
+        root / "sample_outputs" / "cloud_video_transcription" / "corpus.json",
+        root / "sample_outputs" / "ocr_document_cleanup" / "corpus.json",
+    ]:
+        checked += validate_corpus(path, errors)
+    checked += validate_report_brief(root / "sample_outputs" / "report-brief.json", errors)
+    checked += validate_object_map(root / "sample_outputs" / "information-object-map.json", errors)
+    return checked, errors
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Validate generated information objects.")
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    checked, errors = validate(args.root)
+    if errors:
+        for error in errors:
+            print(f"ERROR: {error}", file=sys.stderr)
+        print(f"validated {checked} objects with {len(errors)} errors", file=sys.stderr)
+        return 1
+    print(f"validated {checked} information objects")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

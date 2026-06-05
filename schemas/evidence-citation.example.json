@@ -1,0 +1,11 @@
+{
+  "object_type": "EvidenceCitation",
+  "schema_version": 1,
+  "question": "What source-grounding practices does the workflow need?",
+  "rank": 1,
+  "segment_id": "synthetic-notes#p001",
+  "source_id": "synthetic-notes",
+  "citation": "Synthetic Seminar Board Notes, page 1",
+  "score": 3,
+  "excerpt": "A short public-safe excerpt supporting the question."
+}

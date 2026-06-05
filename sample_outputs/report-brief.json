@@ -1,0 +1,76 @@
+{
+  "evidence_citations": [
+    {
+      "citation": "Assessment Review Cycle Planning Notes, segment 1",
+      "excerpt": "The assessment team wants a repeatable review cycle that turns unstructured\nmeeting notes into action items. Teachers describe item-level patterns, common\nmisconceptions, and places where students need a short remediation sequence.\n\nThe current pain point is that useful observations are scattered across meeting\nnotes, spreadsheet comments, and informal follow-up messages. A content\nintelligence workflow should collect those notes, normalize the language, segment\nthe material by source, and preserve citations back to the original source.",
+      "object_type": "EvidenceCitation",
+      "question": "What source-grounding and citation practices does the workflow need?",
+      "rank": 1,
+      "score": 4,
+      "segment_id": "assessment-review-cycle-planning-notes#01",
+      "source_id": "assessment-review-cycle-planning-notes"
+    },
+    {
+      "citation": "Assessment Review Cycle Planning Notes, segment 2",
+      "excerpt": "The first report should answer three questions: which concepts need reteaching,\nwhich items need revision, and which follow-up artifacts should be created for\nstudents. The report should avoid overclaiming. It should quote or cite the\nsource notes that support each recommendation.",
+      "object_type": "EvidenceCitation",
+      "question": "What source-grounding and citation practices does the workflow need?",
+      "rank": 2,
+      "score": 3,
+      "segment_id": "assessment-review-cycle-planning-notes#02",
+      "source_id": "assessment-review-cycle-planning-notes"
+    },
+    {
+      "citation": "Assessment Review Cycle Planning Notes, segment 2",
+      "excerpt": "The first report should answer three questions: which concepts need reteaching,\nwhich items need revision, and which follow-up artifacts should be created for\nstudents. The report should avoid overclaiming. It should quote or cite the\nsource notes that support each recommendation.",
+      "object_type": "EvidenceCitation",
+      "question": "What workflow controls should remain under teacher or reviewer judgment?",
+      "rank": 1,
+      "score": 4,
+      "segment_id": "assessment-review-cycle-planning-notes#02",
+      "source_id": "assessment-review-cycle-planning-notes"
+    },
+    {
+      "citation": "Curriculum Search Notes, segment 1",
+      "excerpt": "A curriculum lead wants to search across lesson notes, assessment reflections,\nand sample remediation plans. The search experience should prioritize concepts,\nskills, and instructional decisions rather than exact file names.\n\nThe corpus should support questions like: where did the team discuss\nmisconceptions about exponential models, which lessons produced remediation\nartifacts, and which assessments led to item revisions. The system should return\nshort passages with source labels so the reader can inspect the evidence.",
+      "object_type": "EvidenceCitation",
+      "question": "What workflow controls should remain under teacher or reviewer judgment?",
+      "rank": 2,
+      "score": 3,
+      "segment_id": "curriculum-search-notes#01",
+      "source_id": "curriculum-search-notes"
+    },
+    {
+      "citation": "Curriculum Search Notes, segment 2",
+      "excerpt": "For a public demo, all documents must be synthetic or public-license examples.\nThe demo should not include student names, grades, private school documents,\ninternal course links, or raw transcripts from private meetings or classes.",
+      "object_type": "EvidenceCitation",
+      "question": "What public safety rules govern the demo corpus?",
+      "rank": 1,
+      "score": 4,
+      "segment_id": "curriculum-search-notes#02",
+      "source_id": "curriculum-search-notes"
+    },
+    {
+      "citation": "Curriculum Search Notes, segment 1",
+      "excerpt": "A curriculum lead wants to search across lesson notes, assessment reflections,\nand sample remediation plans. The search experience should prioritize concepts,\nskills, and instructional decisions rather than exact file names.\n\nThe corpus should support questions like: where did the team discuss\nmisconceptions about exponential models, which lessons produced remediation\nartifacts, and which assessments led to item revisions. The system should return\nshort passages with source labels so the reader can inspect the evidence.",
+      "object_type": "EvidenceCitation",
+      "question": "What public safety rules govern the demo corpus?",
+      "rank": 2,
+      "score": 1,
+      "segment_id": "curriculum-search-notes#01",
+      "source_id": "curriculum-search-notes"
+    }
+  ],
+  "object_type": "ReportBrief",
+  "public_safety": {
+    "contains_private_content": false,
+    "uses_synthetic_sources": true
+  },
+  "questions": [
+    "What source-grounding and citation practices does the workflow need?",
+    "What workflow controls should remain under teacher or reviewer judgment?",
+    "What public safety rules govern the demo corpus?"
+  ],
+  "schema_version": 1,
+  "title": "Source-Grounded Content Intelligence Demo Report"
+}

@@ -1,0 +1,9 @@
+{
+  "object_type": "NormalizedArtifact",
+  "schema_version": 1,
+  "artifact_id": "synthetic-notes.cleaned",
+  "source_id": "synthetic-notes",
+  "transform": "conservative_cleanup",
+  "text_path": "sample_outputs/ocr_document_cleanup/cleaned_notes.md",
+  "status": "ready_for_segmentation"
+}

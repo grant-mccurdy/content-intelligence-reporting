@@ -1,21 +1,21 @@
 # Pipeline Overview
 
-This public demo turns messy source text into a cited report using only
-synthetic material.
+This public demo turns messy instructional artifacts into analysis-ready
+information objects using only synthetic material.
 
 ```text
-source documents
--> manifest with checksums and source metadata
--> normalized corpus
--> source-preserving segments
--> keyword retrieval
--> cited report
+instructional artifacts
+-> source manifest records
+-> normalized artifacts
+-> corpus segments
+-> evidence citations
+-> report briefs
 ```
 
-The private `ms-statistics` workspace proved the value of a manifest-driven
-workflow for media transcription, transcript cleaning, and source indexing. This
-repo keeps the transferable architecture while removing private course content,
-private Dropbox paths, raw transcripts, and course-specific prompts.
+A private prototype proved the value of a manifest-driven workflow for media
+transcription, transcript cleaning, and source indexing. This repo keeps the
+transferable architecture while removing private course content, private cloud
+paths, raw transcripts, and course-specific prompts.
 
 ## Scripts
 
@@ -25,11 +25,18 @@ private Dropbox paths, raw transcripts, and course-specific prompts.
   creates citation-preserving text segments.
 - `scripts/search_corpus.py` performs simple keyword retrieval over segments.
 - `scripts/generate_report.py` creates a short cited report from the corpus.
+- `scripts/build_information_object_map.py` summarizes the generated object
+  families across the text, media, and OCR demos.
+- `demos/cloud_video_transcription/run_demo.py` shows staged media-to-transcript
+  ingestion with synthetic cloud records.
+- `demos/ocr_document_cleanup/run_demo.py` shows OCR cleanup and corpus
+  preparation with synthetic page records.
 
 ## Run
 
 ```bash
 make demo
+make portfolio-demo
 make search QUERY="feedback rubric evidence"
 ```
 
@@ -39,6 +46,7 @@ Direct Python equivalent:
 python3 scripts/build_manifest.py
 python3 scripts/build_corpus.py
 python3 scripts/generate_report.py
+python3 scripts/build_information_object_map.py
 python3 scripts/search_corpus.py "feedback rubric evidence"
 ```
 

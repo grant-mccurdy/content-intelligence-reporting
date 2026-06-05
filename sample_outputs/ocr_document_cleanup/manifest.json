@@ -1,0 +1,37 @@
+{
+  "cleaned_sha256": "201a81624ebb37c496b83e01f521f217f1ad8600df485c0692430a9e882d86d4",
+  "demo": "ocr_document_cleanup",
+  "document": {
+    "license": "synthetic-demo",
+    "source_type": "ocr_notes",
+    "title": "Synthetic Seminar Board Notes"
+  },
+  "page_count": 3,
+  "pages": [
+    {
+      "cleanup_status": "simulated_conservative_cleanup",
+      "image_artifact": "private_images/page-001.png",
+      "ocr_status": "simulated",
+      "page": 1
+    },
+    {
+      "cleanup_status": "simulated_conservative_cleanup",
+      "image_artifact": "private_images/page-002.png",
+      "ocr_status": "simulated",
+      "page": 2
+    },
+    {
+      "cleanup_status": "simulated_conservative_cleanup",
+      "image_artifact": "private_images/page-003.png",
+      "ocr_status": "simulated",
+      "page": 3
+    }
+  ],
+  "public_safety": {
+    "contains_real_notes": false,
+    "requires_credentials": false,
+    "uses_synthetic_pages": true
+  },
+  "schema_version": 1,
+  "source": "synthetic_ocr_pages"
+}

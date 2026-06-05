@@ -1,0 +1,68 @@
+{
+  "clean_excerpt_sha256": "63df3d3e36ca9cd64e3684131cf10f2f5c3f8b320119cfaa0d6dc12909af6875",
+  "demo": "cloud_video_transcription",
+  "files": [
+    {
+      "audio_chunk_artifact": "audio_chunks/seminar_01_discussion",
+      "audio_chunk_count": 3,
+      "clean_transcript_artifact": "transcripts_clean/seminar_01_discussion.txt",
+      "cleanup_status": "skipped_existing",
+      "corpus_artifact": "corpus_segments/seminar_01_discussion.json",
+      "corpus_status": "ready_for_segmentation",
+      "download_status": "skipped_existing",
+      "raw_media_artifact": "working_media_stubs/seminar_01_discussion.placeholder.txt",
+      "raw_transcript_artifact": "transcripts_raw/seminar_01_discussion.raw.txt",
+      "server_modified": "2026-01-15T19:20:00Z",
+      "size_bytes": 267300000,
+      "source_hash": "demo-hash-002",
+      "source_name": "seminar_01_discussion.mp4",
+      "source_path": "/Demo Instructional Media/Seminar Recordings/Week 01/seminar_01_discussion.mp4",
+      "transcription_status": "skipped_existing"
+    },
+    {
+      "audio_chunk_artifact": "audio_chunks/seminar_01_intro",
+      "audio_chunk_count": 2,
+      "clean_transcript_artifact": "transcripts_clean/seminar_01_intro.txt",
+      "cleanup_status": "skipped_existing",
+      "corpus_artifact": "corpus_segments/seminar_01_intro.json",
+      "corpus_status": "ready_for_segmentation",
+      "download_status": "skipped_existing",
+      "raw_media_artifact": "working_media_stubs/seminar_01_intro.placeholder.txt",
+      "raw_transcript_artifact": "transcripts_raw/seminar_01_intro.raw.txt",
+      "server_modified": "2026-01-15T18:05:00Z",
+      "size_bytes": 184500000,
+      "source_hash": "demo-hash-001",
+      "source_name": "seminar_01_intro.mp4",
+      "source_path": "/Demo Instructional Media/Seminar Recordings/Week 01/seminar_01_intro.mp4",
+      "transcription_status": "skipped_existing"
+    },
+    {
+      "audio_chunk_artifact": "audio_chunks/seminar_02_modeling",
+      "audio_chunk_count": 3,
+      "clean_transcript_artifact": "transcripts_clean/seminar_02_modeling.txt",
+      "cleanup_status": "skipped_existing",
+      "corpus_artifact": "corpus_segments/seminar_02_modeling.json",
+      "corpus_status": "ready_for_segmentation",
+      "download_status": "skipped_existing",
+      "raw_media_artifact": "working_media_stubs/seminar_02_modeling.placeholder.txt",
+      "raw_transcript_artifact": "transcripts_raw/seminar_02_modeling.raw.txt",
+      "server_modified": "2026-01-22T18:10:00Z",
+      "size_bytes": 329100000,
+      "source_hash": "demo-hash-003",
+      "source_name": "seminar_02_modeling.mov",
+      "source_path": "/Demo Instructional Media/Seminar Recordings/Week 02/seminar_02_modeling.mov",
+      "transcription_status": "skipped_existing"
+    }
+  ],
+  "folder": "/Demo Instructional Media/Seminar Recordings",
+  "media_file_count": 3,
+  "public_safety": {
+    "contains_real_media": false,
+    "contains_real_transcripts": false,
+    "requires_credentials": false,
+    "uses_synthetic_listing": true
+  },
+  "schema_version": 1,
+  "source": "synthetic_cloud_listing",
+  "total_media_size_bytes": 780900000
+}

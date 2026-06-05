@@ -1,0 +1,34 @@
+{
+  "source": "synthetic_cloud_listing",
+  "folder": "/Demo Instructional Media/Seminar Recordings",
+  "entries": [
+    {
+      "name": "seminar_01_intro.mp4",
+      "path_display": "/Demo Instructional Media/Seminar Recordings/Week 01/seminar_01_intro.mp4",
+      "server_modified": "2026-01-15T18:05:00Z",
+      "size": 184500000,
+      "content_hash": "demo-hash-001"
+    },
+    {
+      "name": "seminar_01_discussion.mp4",
+      "path_display": "/Demo Instructional Media/Seminar Recordings/Week 01/seminar_01_discussion.mp4",
+      "server_modified": "2026-01-15T19:20:00Z",
+      "size": 267300000,
+      "content_hash": "demo-hash-002"
+    },
+    {
+      "name": "seminar_02_modeling.mov",
+      "path_display": "/Demo Instructional Media/Seminar Recordings/Week 02/seminar_02_modeling.mov",
+      "server_modified": "2026-01-22T18:10:00Z",
+      "size": 329100000,
+      "content_hash": "demo-hash-003"
+    },
+    {
+      "name": "seminar_notes.md",
+      "path_display": "/Demo Instructional Media/Seminar Recordings/Week 02/seminar_notes.md",
+      "server_modified": "2026-01-22T20:00:00Z",
+      "size": 4200,
+      "content_hash": "demo-hash-004"
+    }
+  ]
+}

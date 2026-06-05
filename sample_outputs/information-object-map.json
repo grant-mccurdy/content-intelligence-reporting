@@ -1,0 +1,42 @@
+{
+  "description": "Synthetic demo map showing how instructional artifacts become analysis-ready data objects.",
+  "object_families": [
+    "SourceManifestRecord",
+    "NormalizedArtifact",
+    "CorpusSegment",
+    "EvidenceCitation",
+    "ReportBrief"
+  ],
+  "object_type": "InformationObjectMap",
+  "pipelines": [
+    {
+      "corpus_segments": 6,
+      "evidence_citations": 6,
+      "normalized_artifacts": 3,
+      "pipeline": "synthetic_text_sources",
+      "report_briefs": 1,
+      "source_manifest_records": 3
+    },
+    {
+      "corpus_segments": 11,
+      "evidence_citations": 0,
+      "normalized_artifacts": 3,
+      "pipeline": "cloud_video_transcription",
+      "report_briefs": 0,
+      "source_manifest_records": 3
+    },
+    {
+      "corpus_segments": 3,
+      "evidence_citations": 0,
+      "normalized_artifacts": 3,
+      "pipeline": "ocr_document_cleanup",
+      "report_briefs": 0,
+      "source_manifest_records": 3
+    }
+  ],
+  "public_safety": {
+    "contains_private_content": false,
+    "uses_synthetic_sources": true
+  },
+  "schema_version": 1
+}

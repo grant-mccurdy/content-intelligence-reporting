@@ -1,6 +1,8 @@
 # Content Intelligence Reporting
 
-Generalized content intelligence pipeline for turning unstructured content into a searchable corpus and producing targeted, source-grounded analytical reports.
+Generalized content intelligence pipeline for turning unstructured instructional
+artifacts into analysis-ready information objects, searchable corpora, and
+source-grounded analytical reports.
 
 This repository is intended to demonstrate the public-safe version of a private workflow originally developed around transcript/corpus construction and analytical reporting. The public version must use sanitized, synthetic, or public-license source material.
 
@@ -8,11 +10,77 @@ This repository is intended to demonstrate the public-safe version of a private 
 
 - Unstructured text processing
 - Transcript or corpus construction
+- Media-to-transcript ingestion
+- OCR cleanup and document-to-corpus ingestion
 - Content extraction
 - Source-grounded analysis
+- Analysis-ready information objects
 - AI-assisted analytical workflows
 - Task-specific report generation
 - Reproducible pipeline design
+
+## Featured Workflow
+
+The core project pattern is:
+
+```text
+instructional artifacts
+-> source manifest records
+-> normalized artifacts
+-> corpus segments
+-> evidence citations
+-> report briefs / agent-ready context
+```
+
+See `docs/information-object-model.md` for the object model and `schemas/` for
+public-safe JSON examples.
+
+## What To Inspect First
+
+- `docs/information-object-model.md`: the reusable object model.
+- `docs/using-information-objects.md`: how algorithms, reports, and agents use the objects.
+- `sample_outputs/information-object-map.json`: object counts across all demos.
+- `sample_outputs/report-brief.json`: structured report output with cited evidence.
+- `demos/cloud_video_transcription/`: staged media-to-corpus simulation.
+- `demos/ocr_document_cleanup/`: OCR cleanup-to-corpus simulation.
+
+### Cloud Video-to-Corpus Ingestion
+
+`docs/cloud-video-transcription-workflow.md` documents a public-safe version of
+a real workflow for turning cloud-hosted instructional videos into cleaned,
+searchable transcript artifacts. The demo uses synthetic filenames and sample
+text, but preserves the transferable engineering pattern:
+
+```text
+cloud video inventory
+-> media selection
+-> temporary private download
+-> audio chunking
+-> transcription
+-> transcript cleanup
+-> manifest and corpus-ready artifacts
+```
+
+Run the synthetic demo:
+
+```bash
+python3 demos/cloud_video_transcription/run_demo.py
+```
+
+### OCR Notes-to-Corpus Cleanup
+
+`demos/ocr_document_cleanup/` demonstrates the adjacent workflow for turning
+OCR text from document images into cleaned, citation-ready corpus records.
+
+```bash
+python3 demos/ocr_document_cleanup/run_demo.py
+```
+
+Build the full object map:
+
+```bash
+make portfolio-demo
+```
 
 ## Current Structure
 
@@ -30,13 +98,22 @@ content-intelligence-reporting/
 │   ├── build_manifest.py
 │   ├── build_corpus.py
 │   ├── search_corpus.py
-│   └── generate_report.py
+│   ├── generate_report.py
+│   └── build_information_object_map.py
+├── demos/
+│   ├── cloud_video_transcription/
+│   └── ocr_document_cleanup/
 ├── reports/
 ├── sample_outputs/
 ├── docs/
+│   ├── information-object-model.md
 │   ├── pipeline-overview.md
+│   ├── cloud-video-transcription-workflow.md
+│   ├── cleanup-policy.md
+│   ├── using-information-objects.md
 │   ├── source-grounding.md
 │   └── privacy-and-copyright.md
+├── schemas/
 ├── screenshots/
 └── README.md
 ```
@@ -48,6 +125,7 @@ The current scaffold is offline and standard-library only.
 ```bash
 make demo
 make search QUERY="feedback rubric evidence"
+make validate
 ```
 
 If `make` is unavailable, run the same steps directly:
@@ -57,6 +135,7 @@ python3 scripts/build_manifest.py
 python3 scripts/build_corpus.py
 python3 scripts/generate_report.py
 python3 scripts/search_corpus.py "feedback rubric evidence"
+python3 scripts/validate_information_objects.py
 ```
 
 The demo builds:
@@ -64,6 +143,7 @@ The demo builds:
 - `data/processed/manifest.json`
 - `data/processed/corpus.json`
 - `sample_outputs/demo-report.md`
+- `sample_outputs/report-brief.json`
 
 Generated outputs are reproducible and intentionally ignored where appropriate.
 The committed sources use synthetic public-safe notes only.
@@ -76,7 +156,9 @@ Public examples should use synthetic transcripts or public-domain/public-license
 
 ## Portfolio Framing
 
-This project should emphasize the transferable pipeline: ingest, normalize, segment, retrieve, cite, and report. The value is source-grounded reporting from messy unstructured content, not the private course context.
+This project should emphasize the transferable pipeline: ingest, normalize,
+segment, retrieve, cite, and report. The value is converting messy instructional
+artifacts into reusable information objects, not the private course context.
 
 ## Status
 

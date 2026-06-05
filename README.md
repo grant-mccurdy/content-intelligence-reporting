@@ -38,6 +38,8 @@ instructional artifacts
 See `docs/information-object-model.md` for the object model and `schemas/` for
 public-safe JSON examples.
 
+For a diagrammed walkthrough, see `docs/workflow-diagram.md`.
+
 ## Primary Artifact
 
 The canonical artifact is `sample_outputs/analysis-method-pack.json`: an
@@ -51,11 +53,27 @@ The source method pack lives in `method_pack/` with human-readable companions:
 - `method_pack/source-use-policy.md`
 - `method_pack/example-context.md`
 
+## Reviewer Path
+
+This repository is designed to be reviewed quickly before running anything.
+
+1. Inspect `sample_outputs/analysis-method-pack.json` to see the final
+   AI-readable method contract.
+2. Read `docs/workflow-diagram.md` to understand how raw instructional artifacts
+   become reusable information objects.
+3. Run `make portfolio-demo` to rebuild the demo artifacts and validate the
+   generated objects.
+4. Inspect `sample_outputs/report-brief.json` and
+   `sample_outputs/information-object-map.json` to see the structured reporting
+   output and object inventory.
+
 ## What To Inspect First
 
 - `sample_outputs/analysis-method-pack.json`: AI-readable reporting method contract.
 - `docs/information-object-model.md`: the reusable object model.
 - `docs/using-information-objects.md`: how algorithms, reports, and agents use the objects.
+- `docs/completion-rubric.md`: the portfolio-ready completion criteria.
+- `docs/workflow-diagram.md`: the artifact-to-analysis workflow diagram.
 - `sample_outputs/information-object-map.json`: object counts across all demos.
 - `sample_outputs/report-brief.json`: structured report output with cited evidence.
 - `demos/cloud_video_transcription/`: staged media-to-corpus simulation.
@@ -126,6 +144,8 @@ content-intelligence-reporting/
 ├── docs/
 │   ├── information-object-model.md
 │   ├── pipeline-overview.md
+│   ├── workflow-diagram.md
+│   ├── completion-rubric.md
 │   ├── cloud-video-transcription-workflow.md
 │   ├── cleanup-policy.md
 │   ├── using-information-objects.md
@@ -184,5 +204,7 @@ artifacts into reusable information objects, not the private course context.
 
 ## Status
 
-Public-safe scaffold implemented with synthetic input data, manifest creation,
-corpus segmentation, transparent keyword retrieval, and a cited sample report.
+Portfolio-ready public scaffold implemented with synthetic input data, manifest
+creation, corpus segmentation, staged media and OCR demos, transparent keyword
+retrieval, source-grounded reporting, an AI-readable method pack, and validation
+for generated information objects.
